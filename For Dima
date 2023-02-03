@@ -1,0 +1,160 @@
+import random
+import time
+
+login = 'admin'
+# Спросите у пользователя логин и сравните со своим
+user_login = input('Ваш логин: ')
+if user_login == login:
+    print('Добро пожаловать, создатель! Что вы хотите изменить?')
+elif user_login != login:
+    print('Добро пожаловать,', user_login, '!')
+
+while True:
+    command = input('Какую команду вы выберете? двери, квиз, предсказание, кубик, кнб')
+    # Допишите условие для запуска команды и другой исход при отсутствии команды
+    if command == 'двери':
+        print('двери запущены')
+        doors = int(input("Перед вами 3 двери, выберите одну"))
+        if doors == 1:
+            print('Вы открыли первую дверь. Здесь ничего нет')
+        elif doors == 2:
+            print("Вы открыли вторую дверь. Вы встретили Чебурашку.exe.")
+        elif doors == 3:
+            print("Вы открыли третью дверь. Вы встретили кобру")
+        else:
+            print("Таких дверей нет")
+    elif command == 'квиз':
+        print('квиз запущен')
+        point = 0
+        
+        # Напиши свой квиз!
+        name = input('как вас зовут?')
+        age = int(input('Сколько вам лет'))
+        print("Привет, ", name)
+        print("Рад поприветствовать тебя в квизе под названием Pets")
+        q1 = input("У кого из перечисленных животных, есть рога? (Коза, корова, осёл)")
+        if q1 == "коза" or q1 == "корова":
+            print("верно")
+            point += 1
+            print("ваши очки, ", point)
+            print('Необходимо ответить на два ответа сразу')
+            q2 = input("Есть ли у коровы 3 глаз")
+            q3 = input('Дружат ли Коза с Ослом')
+            if q2 == 'нет' and q3 == 'да':
+                print("Верно")
+                point += 1
+                print("Ваши очки, ", point)
+                print('Молодец, вы прошли квиз')
+            else:
+                print('Не верно')
+        else:
+            print('не верно')
+            print('Правильные: ответы коза и корова')
+            print('Необходимо ответить на два ответа сразу')
+            q2 = input("Есть ли у коровы 3 глаз")
+            q3 = input('Дружат ли Коза с Ослом')
+            if q2 == 'нет' and q3 == 'да':
+                print("Верно")
+                point += 1
+                print("Ваши очки, ", point)
+                print('Молодец, вы прошли квиз')
+            else:
+                print('Не верно')
+
+        if point == 2:
+            print("ты умный")
+        elif point == 1:
+            print("ты полуумный")
+        else:
+            print("ты идиот")
+    elif command == "кубик":
+        q = random.randint(1, 6)
+        print(q)
+    elif command == "предсказание":
+        print('И так...')
+        time.sleep(5)
+        print('Ваше первое предсказание')
+        time.sleep(6)
+
+        r = random.randint(1, 4)
+        if r == 1:
+            print('Вы будете очень оооочень долго жить')
+        elif r == 2:
+            print('Вы никогда не будете учавствовать в войне.')
+        elif r == 3:
+            print('Вы будете играть в майн:)')
+        elif r == 4:
+            print('Вы будете очень оооочень богаты')
+        time.sleep(4)
+        print('И так...')
+        time.sleep(5)
+        print('Ваше второе предсказание')
+        time.sleep(8)
+        x = random.choice(
+            ['Вы попадёте в рай', 'Вы не получите премию дарвина', 'Вы в будущем получите крутую едет и ладно'])
+        print(x)
+        print('И так...')
+        time.sleep(5)
+        print('Ваше третье предсказание')
+        time.sleep(5)
+        print('По яйцу')
+        time.sleep(5)
+
+        y = random.choice(['разбитое', 'обычное'])
+        print('И...')
+        time.sleep(5)
+        print('Яйцо')
+        time.sleep(5)
+        print(y)
+        if y == 'разбитое':
+            print('Вас ждёт успех')
+        elif y == 'обычное':
+            print('Успех надо заработать.')
+    elif command == "кнб":
+        player_score = 0
+        comp_score = 0
+        while True:
+            player = input('введи камень, ножницы, бумага.')
+            print('Ты выбрал: ', player)
+            if player == "камень" or player == "ножницы" or player == "бумага":
+                time.sleep(1)
+                print('Ход компьютера')
+                time.sleep(1)
+
+                # Ход компьютера
+                comp = random.randint(1, 3)
+                if comp == 1:
+                    comp = "камень"
+                elif comp == 2:
+                    comp = "ножницы"
+                else:
+                    comp = "бумага"
+                print("компьютер выбрал", comp)
+                # логика игры
+
+                if (player == "камень" and comp == "ножницы") or (player == "бумага" and comp == "камень") or (
+                        player == "ножницы" and comp == "бумага"):
+                    print('Игрок победил')
+                    player_score += 1
+                elif player == comp:
+                    print('Ничья')
+                else:
+                    print('Компьютер победил')
+                    comp_score += 1
+
+                print("Ваши очки:", player_score)
+                print("Очки компьютера:", comp_score)
+                if player_score == 3 or comp_score == 3:
+                    if player_score == 3:
+                        print("Ты победил")
+                    if comp_score == 3:
+                        print("Я победил")
+                    break
+                time.sleep(3)
+                print('next round')
+            else:
+                print('Такого выбора нет!')
+                time.sleep(3)
+                print('next round')
+    else:
+        print('такой команды нет')
